@@ -28,7 +28,12 @@ public class PlayerController : MonoBehaviour
     public void movePlayer()
     {
         Vector3 _movement = new Vector3(move.x, 0f, move.y);
-        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(_movement), 0.15f);
+
+        if (_movement != Vector3.zero)
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(_movement), 0.15f);
+
+        //transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(_movement), 0.15f);
         transform.Translate(_movement * speed * Time.deltaTime, Space.World);
+        Debug.Log(_movement);
     }
 }
