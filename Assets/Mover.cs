@@ -4,14 +4,19 @@ using UnityEngine;
 
 public class Mover : MonoBehaviour
 {
+    [SerializeField] private float xValue;
+    [SerializeField] private float zValue;
 
     void Start()
     {
+
     }
 
 
     void Update()
     {
-        transform.Translate(0.01f, 0, 0);
+        float xValue = Input.GetAxisRaw("Horizontal");
+        float zValue = Input.GetAxisRaw("Vertical");
+        transform.Translate(xValue, 0, zValue);
     }
 }
