@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] float moveSpeed;
     private Vector2 moveVector;
+    public int playerHealth = 1;
 
     void Start()
     {
