@@ -6,14 +6,15 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
 
-    [SerializeField] float moveSpeed;
+    private Rigidbody rb;
+
     private Vector2 moveVector;
     public int playerHealth = 1;
 
-    void Start()
-    {
-        
-    }
+    [Header("Inputs")]
+    private float xInput;
+    private float zInput;
+    [SerializeField] float moveSpeed;
 
 
     void Update()
