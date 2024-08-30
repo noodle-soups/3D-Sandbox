@@ -66,30 +66,14 @@ public class NewPlayerController : MonoBehaviour
 
     void HandleRotation()
     {
-        if (isGamepad)
-        {
-            if (Mathf.Abs(aim.x) > controllerDeadZone || Mathf.Abs(aim.y) > controllerDeadZone)
-            {
-                Vector3 playerDirection = Vector3.right * aim.x + Vector3.forward * aim.y;
+        Ray ray = Camera.main.ScreenPointToRay(aim);
+        Plane groundPlane = new Plane(Vector3.up, Vector3.zero);
+        float rayDistance;
 
-                if (playerDirection.sqrMagnitude > 0.0f)
-                {
-                    Quaternion newRotation = Quaternion.LookRotation(playerDirection, Vector3.up);
-                    transform.rotation = Quaternion.RotateTowards(transform.rotation, newRotation, gamepadRotateSmoothing * Time.deltaTime);
-                }
-            }
-        }
-        else
+        if (groundPlane.Raycast(ray, out rayDistance))
         {
-            Ray ray = Camera.main.ScreenPointToRay(aim);
-            Plane groundPlane = new Plane(Vector3.up, Vector3.zero);
-            float rayDistance;
-
-            if(groundPlane.Raycast(ray, out rayDistance))
-            {
-                Vector3 point = ray.GetPoint(rayDistance);
-                LookAt(point);
-            }
+            Vector3 point = ray.GetPoint(rayDistance);
+            LookAt(point);
         }
     }
 
@@ -98,11 +82,5 @@ public class NewPlayerController : MonoBehaviour
         Vector3 heightCorrectedPoint = new Vector3(lookPoint.x, transform.position.y, lookPoint.z);
         transform.LookAt(heightCorrectedPoint);
     }
-
-    public void OnDeviceChange(PlayerInput pi)
-    {
-        isGamepad = pi.currentControlScheme.Equals("Gamepad") ? true : false;
-    }
-
 
 }
