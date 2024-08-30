@@ -415,7 +415,6 @@ MonoBehaviour:
   playerSpeed: 10
   gravityValue: -9.81
   controllerDeadZone: 0.1
-  gamepadRotateSmoothing: 1000
   isGamepad: 0
 --- !u!143 &441031630
 CharacterController:
@@ -561,6 +560,37 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 442335998}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &599010164
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 599010165}
+  m_Layer: 0
+  m_Name: BulletSpawnPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &599010165
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 599010164}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0.436}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1515908464}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &679860667
 GameObject:
   m_ObjectHideFlags: 0
@@ -1282,8 +1312,9 @@ GameObject:
   - component: {fileID: 1515908464}
   - component: {fileID: 1515908467}
   - component: {fileID: 1515908466}
+  - component: {fileID: 1515908468}
   m_Layer: 0
-  m_Name: Aim
+  m_Name: Gun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1301,7 +1332,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0.83, z: 1.41}
   m_LocalScale: {x: 0.16576, y: 0.26011, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 599010165}
   m_Father: {fileID: 441031623}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &1515908466
@@ -1354,6 +1386,21 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1515908463}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1515908468
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1515908463}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a1303208ff28794b9f2d78d01cb50e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletSpawnPoint: {fileID: 599010165}
+  bulletPrefab: {fileID: 8015436422036265387, guid: e3d590e1060d84c4abfde6b760993b41, type: 3}
+  bulletSpeed: 5
 --- !u!1 &1670753506
 GameObject:
   m_ObjectHideFlags: 0
