@@ -25,7 +25,7 @@ public class MousePosition : MonoBehaviour
             mousePos = _raycastHit.point;
             mousePos.y = 1f;
             transform.position = mousePos;
-            Debug.Log(mousePos);
+            //Debug.Log(mousePos);
         }
     }
 }
