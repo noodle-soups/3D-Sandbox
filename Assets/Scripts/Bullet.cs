@@ -7,12 +7,14 @@ public class Bullet : MonoBehaviour
 
     private float bulletTimer;
     [SerializeField] private float bulletTimerDestroy;
+    public float bulletSpeed = 5f;
 
 
     void Update()
     {
         bulletTimer += Time.deltaTime;
-        Debug.Log(bulletTimer);
+
+        GetComponent<Rigidbody>().velocity = transform.forward * bulletSpeed;
 
         if (bulletTimer > bulletTimerDestroy)
             Destroy(gameObject);

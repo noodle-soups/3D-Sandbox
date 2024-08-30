@@ -211,7 +211,7 @@ GameObject:
   - component: {fileID: 441031625}
   - component: {fileID: 441031630}
   - component: {fileID: 441031629}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -569,7 +569,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 599010165}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: BulletSpawnPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1313,7 +1313,7 @@ GameObject:
   - component: {fileID: 1515908467}
   - component: {fileID: 1515908466}
   - component: {fileID: 1515908468}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Gun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1400,7 +1400,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletSpawnPoint: {fileID: 599010165}
   bulletPrefab: {fileID: 8015436422036265387, guid: e3d590e1060d84c4abfde6b760993b41, type: 3}
-  bulletSpeed: 5
 --- !u!1 &1670753506
 GameObject:
   m_ObjectHideFlags: 0
