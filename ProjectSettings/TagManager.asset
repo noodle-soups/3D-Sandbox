@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Obsticle
   - Game Manager
+  - Player-Bullet
+  - Object to Destroy
   layers:
   - Default
   - TransparentFX
