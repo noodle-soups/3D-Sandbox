@@ -730,7 +730,7 @@ GameObject:
   m_Component:
   - component: {fileID: 599010165}
   m_Layer: 3
-  m_Name: GunSpawnPoint
+  m_Name: Bullet Spawn Point
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1583,7 +1583,7 @@ GameObject:
   - component: {fileID: 1515908466}
   - component: {fileID: 1515908468}
   m_Layer: 3
-  m_Name: Gun
+  m_Name: Primary Weapon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1670,7 +1670,7 @@ MonoBehaviour:
   bulletSpawnPoint: {fileID: 599010165}
   bulletPrefab: {fileID: 8015436422036265387, guid: e3d590e1060d84c4abfde6b760993b41, type: 3}
   bulletSpeed: 15
-  bulletCooldown: 0.1
+  bulletCooldown: 0.15
   bulletDestroyTime: 3
 --- !u!1001 &1534303276
 PrefabInstance:

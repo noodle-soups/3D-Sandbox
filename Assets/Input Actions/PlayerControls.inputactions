@@ -24,7 +24,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Fire 1",
+                    "name": "Primary Weapon",
                     "type": "Button",
                     "id": "344c37f2-fc57-4a47-9ddb-926cd558cda7",
                     "expectedControlType": "Button",
@@ -129,7 +129,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
-                    "action": "Fire 1",
+                    "action": "Primary Weapon",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -140,7 +140,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "KBM",
-                    "action": "Fire 1",
+                    "action": "Primary Weapon",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

@@ -46,7 +46,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Fire 1"",
+                    ""name"": ""Primary Weapon"",
                     ""type"": ""Button"",
                     ""id"": ""344c37f2-fc57-4a47-9ddb-926cd558cda7"",
                     ""expectedControlType"": ""Button"",
@@ -151,7 +151,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
-                    ""action"": ""Fire 1"",
+                    ""action"": ""Primary Weapon"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -162,7 +162,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""KBM"",
-                    ""action"": ""Fire 1"",
+                    ""action"": ""Primary Weapon"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -203,7 +203,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_Controls = asset.FindActionMap("Controls", throwIfNotFound: true);
         m_Controls_Movement = m_Controls.FindAction("Movement", throwIfNotFound: true);
         m_Controls_Aim = m_Controls.FindAction("Aim", throwIfNotFound: true);
-        m_Controls_Fire1 = m_Controls.FindAction("Fire 1", throwIfNotFound: true);
+        m_Controls_PrimaryWeapon = m_Controls.FindAction("Primary Weapon", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -267,14 +267,14 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private List<IControlsActions> m_ControlsActionsCallbackInterfaces = new List<IControlsActions>();
     private readonly InputAction m_Controls_Movement;
     private readonly InputAction m_Controls_Aim;
-    private readonly InputAction m_Controls_Fire1;
+    private readonly InputAction m_Controls_PrimaryWeapon;
     public struct ControlsActions
     {
         private @PlayerControls m_Wrapper;
         public ControlsActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
         public InputAction @Movement => m_Wrapper.m_Controls_Movement;
         public InputAction @Aim => m_Wrapper.m_Controls_Aim;
-        public InputAction @Fire1 => m_Wrapper.m_Controls_Fire1;
+        public InputAction @PrimaryWeapon => m_Wrapper.m_Controls_PrimaryWeapon;
         public InputActionMap Get() { return m_Wrapper.m_Controls; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -290,9 +290,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Aim.started += instance.OnAim;
             @Aim.performed += instance.OnAim;
             @Aim.canceled += instance.OnAim;
-            @Fire1.started += instance.OnFire1;
-            @Fire1.performed += instance.OnFire1;
-            @Fire1.canceled += instance.OnFire1;
+            @PrimaryWeapon.started += instance.OnPrimaryWeapon;
+            @PrimaryWeapon.performed += instance.OnPrimaryWeapon;
+            @PrimaryWeapon.canceled += instance.OnPrimaryWeapon;
         }
 
         private void UnregisterCallbacks(IControlsActions instance)
@@ -303,9 +303,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Aim.started -= instance.OnAim;
             @Aim.performed -= instance.OnAim;
             @Aim.canceled -= instance.OnAim;
-            @Fire1.started -= instance.OnFire1;
-            @Fire1.performed -= instance.OnFire1;
-            @Fire1.canceled -= instance.OnFire1;
+            @PrimaryWeapon.started -= instance.OnPrimaryWeapon;
+            @PrimaryWeapon.performed -= instance.OnPrimaryWeapon;
+            @PrimaryWeapon.canceled -= instance.OnPrimaryWeapon;
         }
 
         public void RemoveCallbacks(IControlsActions instance)
@@ -345,6 +345,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     {
         void OnMovement(InputAction.CallbackContext context);
         void OnAim(InputAction.CallbackContext context);
-        void OnFire1(InputAction.CallbackContext context);
+        void OnPrimaryWeapon(InputAction.CallbackContext context);
     }
 }
