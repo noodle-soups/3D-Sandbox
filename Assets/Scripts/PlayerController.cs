@@ -6,57 +6,76 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
 
-    private Rigidbody rb;
+    // references
+    private CharacterController controller;
+    private PlayerControls playerControls;
+    private PlayerInput playerInput;
 
-    [Header("Inputs")]
-    private Vector2 moveVector;
-    [SerializeField] float moveSpeed;
+    [Header("Player Properties")]
+    [SerializeField] private float playerSpeed = 10f;
+    [SerializeField] private float gravityValue = -9.81f;
 
-    private Camera mainCamera;
-    [SerializeField] private LayerMask groundLayer;
+    // variables
+    private Vector2 movement;
+    private Vector2 aim;
+    private Vector3 playerVelocity;
 
 
-    void Start()
+    void Awake()
     {
-        mainCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
+        controller = GetComponent<CharacterController>();
+        playerControls = new PlayerControls();
+        playerInput = GetComponent<PlayerInput>();
+    }
+
+    void OnEnable()
+    {
+        playerControls.Enable();
+    }
+
+    void OnDisable()
+    {
+        playerControls.Disable();
     }
 
     void Update()
     {
-        movePlayer();
-        RotatePlayerToMouse();
+        HandleInput();
+        HandleMovement();
+        HandleRotation();
     }
 
-    public void OnMove(InputAction.CallbackContext context)
+    void HandleInput()
     {
-        moveVector = context.ReadValue<Vector2>();
+        movement = playerControls.Controls.Movement.ReadValue<Vector2>();
+        aim = playerControls.Controls.Aim.ReadValue<Vector2>();
     }
 
-    public void movePlayer()
+    void HandleMovement()
     {
-        Vector3 _movement = new Vector3(moveVector.x, 0f, moveVector.y);
-        transform.Translate(_movement * moveSpeed * Time.deltaTime, Space.World);
+        Vector3 move = new Vector3(movement.x, 0, movement.y);
+        controller.Move(move * Time.deltaTime * playerSpeed);
+        playerVelocity.y += gravityValue * Time.deltaTime;
+        controller.Move(playerVelocity * Time.deltaTime);
     }
 
-    private void RotatePlayerToMouse()
+    void HandleRotation()
     {
-        Ray _mouseRay = mainCamera.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(_mouseRay, out RaycastHit _raycastHit, float.MaxValue, groundLayer))
+        Ray ray = Camera.main.ScreenPointToRay(aim);
+        Plane groundPlane = new Plane(Vector3.up, Vector3.zero);
+        float rayDistance;
+
+        if (groundPlane.Raycast(ray, out rayDistance))
         {
-            Vector3 _targetPosition = _raycastHit.point;
-            // calculate the direction from the player to the target position
-            Vector3 _direction = _targetPosition - transform.position;
-            // reset y
-            _direction.y = 0f;
-            // rotate towards _targetPosition
-            if (_direction != Vector3.zero)
-            {
-                Quaternion _targetRotation = Quaternion.LookRotation(_direction);
-                Debug.Log(_targetRotation);
-                transform.rotation = Quaternion.Slerp(transform.rotation, _targetRotation, 0.15f);
-            }
+            Vector3 point = ray.GetPoint(rayDistance);
+            LookAt(point);
         }
+    }
 
+    void LookAt(Vector3 lookPoint)
+    {
+        Vector3 heightCorrectedPoint = new Vector3(lookPoint.x, transform.position.y, lookPoint.z);
+        transform.LookAt(heightCorrectedPoint);
     }
 
 }
