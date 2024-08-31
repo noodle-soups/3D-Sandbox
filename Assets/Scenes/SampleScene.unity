@@ -207,9 +207,9 @@ GameObject:
   - component: {fileID: 441031621}
   - component: {fileID: 441031628}
   - component: {fileID: 441031627}
+  - component: {fileID: 441031630}
   - component: {fileID: 441031626}
   - component: {fileID: 441031625}
-  - component: {fileID: 441031630}
   - component: {fileID: 441031629}
   m_Layer: 3
   m_Name: Player
@@ -1400,6 +1400,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletSpawnPoint: {fileID: 599010165}
   bulletPrefab: {fileID: 8015436422036265387, guid: e3d590e1060d84c4abfde6b760993b41, type: 3}
+  bulletCooldownTimer: 0
+  bulletCooldown: 0.1
+  isBulletReady: 1
 --- !u!1 &1670753506
 GameObject:
   m_ObjectHideFlags: 0
