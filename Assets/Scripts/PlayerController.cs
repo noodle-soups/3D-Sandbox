@@ -14,6 +14,14 @@ public class PlayerController : MonoBehaviour
     private PlayerInput playerInput;
     private Rigidbody rb;
 
+    [Header("States")]
+    [SerializeField] private bool isIdle = true;
+    [SerializeField] private bool isMoving = false;
+    [SerializeField] private bool isDashing = false;
+
+    [Header("Cooldowns")]
+    [SerializeField] private bool dashReady = true;
+
     [Header("Player Properties")]
     [SerializeField] private float playerSpeed = 10f;
     [SerializeField] private float gravityValue = -9.81f;
@@ -23,10 +31,8 @@ public class PlayerController : MonoBehaviour
     [Header("Dash Properties")]
     [SerializeField] private float dashSpeed = 20f;
     [SerializeField] private float dashDuration = 0.2f;
-    [SerializeField] private float dashCooldown = 1f;
+    [SerializeField] private float dashCooldown = 2f;
     [SerializeField] private float dashCooldownTimer;
-    [SerializeField] private bool dashReady = true;
-    private bool isDashing = false;
     private Vector3 dashDirection;
 
     // variables
@@ -39,10 +45,17 @@ public class PlayerController : MonoBehaviour
 
     void Awake()
     {
+        // references
         controller = GetComponent<CharacterController>();
         playerControls = new PlayerControls();
         playerInput = GetComponent<PlayerInput>();
         rb = GetComponent<Rigidbody>();
+
+        // state
+        isIdle = true;
+
+        // bind inputs
+        playerControls.Controls.Dash.performed += _ => StartDash();
     }
 
     void OnEnable()
@@ -60,22 +73,6 @@ public class PlayerController : MonoBehaviour
         HandleInput();
         HandleMovement();
         HandleRotation();
-
-        if (Input.GetKeyDown(KeyCode.Alpha1) && dashReady)
-        {
-            StartDash();
-        }
-
-        // Cooldown logic
-        if (!dashReady)
-        {
-            dashCooldownTimer += Time.deltaTime;
-            if (dashCooldownTimer >= dashCooldown)
-            {
-                dashReady = true;
-                dashCooldownTimer = 0f;
-            }
-        }
     }
 
     void HandleInput()
@@ -86,16 +83,28 @@ public class PlayerController : MonoBehaviour
 
     void HandleMovement()
     {
+        // dash movement take priority over normal movement
         if (isDashing)
         {
             controller.Move(dashDirection * Time.deltaTime * dashSpeed);
-            return;  // Skip regular movement during dash
+            return;
+        }
+
+        if (rb.velocity == Vector3.zero)
+        {
+            isIdle = true;
+            isMoving = false;
+        }
+        else if (rb.velocity != Vector3.zero)
+        {
+            isIdle = false;
+            isMoving = true;
         }
 
         Vector3 move = new Vector3(movement.x, 0, movement.y);
         controller.Move(move * Time.deltaTime * playerSpeed);
 
-        // Apply gravity
+        // default gravity
         playerVelocity.y += gravityValue * Time.deltaTime;
         controller.Move(playerVelocity * Time.deltaTime);
     }
@@ -137,20 +146,19 @@ public class PlayerController : MonoBehaviour
 
     void StartDash()
     {
-        if (dashReady)
-        {
-            isDashing = true;
-            dashReady = false;
-            dashDirection = new Vector3(movement.x, 0, movement.y).normalized;
-            StartCoroutine(StopDash());
-        }
+        if (!dashReady) return;
+        isDashing = true;
+        dashReady = false;
+        dashDirection = new Vector3(movement.x, 0, movement.y).normalized;
+        StartCoroutine(StopDash());
     }
 
     IEnumerator StopDash()
     {
         yield return new WaitForSeconds(dashDuration);
         isDashing = false;
-        dashCooldownTimer = 0f;
+        yield return new WaitForSeconds(dashCooldown);
+        dashReady = true;
     }
 
     public void OnDeviceChange(PlayerInput pi)

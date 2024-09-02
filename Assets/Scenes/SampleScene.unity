@@ -504,6 +504,10 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 6c4651f2-5cc3-4302-bff7-fe333b29dbc1
     m_ActionName: PlayerControls/Aim[/Mouse/position]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 344c37f2-fc57-4a47-9ddb-926cd558cda7
+    m_ActionName: Controls/Primary Weapon[/DualSenseGamepadHID/rightShoulder,/DualSenseGamepadHID1/rightShoulder,/Keyboard/space]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Controls
@@ -521,10 +525,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bbf9583fff5bfe4e98f2c8a0b9dea54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isIdle: 1
+  isMoving: 0
+  isDashing: 0
+  dashReady: 1
   playerSpeed: 10
   gravityValue: -9.81
   controllerDeadZone: 0.1
   gamepadRotateSmoothing: 1000
+  dashSpeed: 25
+  dashDuration: 0.3
+  dashCooldown: 0.5
+  dashCooldownTimer: 0
   isGamepad: 0
 --- !u!54 &441031627
 Rigidbody:
@@ -1548,7 +1560,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1514077785
 Transform:
   m_ObjectHideFlags: 0

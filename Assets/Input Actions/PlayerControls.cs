@@ -53,6 +53,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Dash"",
+                    ""type"": ""Button"",
+                    ""id"": ""82756250-446e-4471-9b2a-ae8b430bf656"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -165,6 +174,28 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""action"": ""Primary Weapon"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""154d39b1-9d4f-4338-a570-8004ed6147f5"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Dash"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""848b2d12-1192-432b-9df7-f7f8612e2006"",
+                    ""path"": ""<Keyboard>/leftShift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KBM"",
+                    ""action"": ""Dash"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -204,6 +235,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_Controls_Movement = m_Controls.FindAction("Movement", throwIfNotFound: true);
         m_Controls_Aim = m_Controls.FindAction("Aim", throwIfNotFound: true);
         m_Controls_PrimaryWeapon = m_Controls.FindAction("Primary Weapon", throwIfNotFound: true);
+        m_Controls_Dash = m_Controls.FindAction("Dash", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -268,6 +300,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Controls_Movement;
     private readonly InputAction m_Controls_Aim;
     private readonly InputAction m_Controls_PrimaryWeapon;
+    private readonly InputAction m_Controls_Dash;
     public struct ControlsActions
     {
         private @PlayerControls m_Wrapper;
@@ -275,6 +308,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         public InputAction @Movement => m_Wrapper.m_Controls_Movement;
         public InputAction @Aim => m_Wrapper.m_Controls_Aim;
         public InputAction @PrimaryWeapon => m_Wrapper.m_Controls_PrimaryWeapon;
+        public InputAction @Dash => m_Wrapper.m_Controls_Dash;
         public InputActionMap Get() { return m_Wrapper.m_Controls; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -293,6 +327,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @PrimaryWeapon.started += instance.OnPrimaryWeapon;
             @PrimaryWeapon.performed += instance.OnPrimaryWeapon;
             @PrimaryWeapon.canceled += instance.OnPrimaryWeapon;
+            @Dash.started += instance.OnDash;
+            @Dash.performed += instance.OnDash;
+            @Dash.canceled += instance.OnDash;
         }
 
         private void UnregisterCallbacks(IControlsActions instance)
@@ -306,6 +343,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @PrimaryWeapon.started -= instance.OnPrimaryWeapon;
             @PrimaryWeapon.performed -= instance.OnPrimaryWeapon;
             @PrimaryWeapon.canceled -= instance.OnPrimaryWeapon;
+            @Dash.started -= instance.OnDash;
+            @Dash.performed -= instance.OnDash;
+            @Dash.canceled -= instance.OnDash;
         }
 
         public void RemoveCallbacks(IControlsActions instance)
@@ -346,5 +386,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         void OnMovement(InputAction.CallbackContext context);
         void OnAim(InputAction.CallbackContext context);
         void OnPrimaryWeapon(InputAction.CallbackContext context);
+        void OnDash(InputAction.CallbackContext context);
     }
 }
