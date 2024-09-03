@@ -29,17 +29,17 @@ public class ObjectToDestroy : MonoBehaviour
     {
         if (readyToDestroy)
         {
-            
+            // rotate
             float _destroyRotationSpeed = destroyRotationSpeed * Time.deltaTime;
             transform.Rotate(0, _destroyRotationSpeed, 0);
 
+            // shrink
             float _destroyShrinkSpeed = destroyShrinkSpeed * Time.deltaTime;
             transform.localScale -= new Vector3(_destroyShrinkSpeed, _destroyShrinkSpeed, _destroyShrinkSpeed);
 
+            // then destroy
             if (Mathf.Min(transform.localScale.x, transform.localScale.y, transform.localScale.z) <= 0)
-            {
                 Destroy(gameObject);
-            }
 
         }
     }

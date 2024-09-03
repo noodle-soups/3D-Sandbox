@@ -136,11 +136,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1099909991920203810, guid: fc748b6628afe09468c9b17e68873a25, type: 3}
       propertyPath: destroyShrinkSpeed
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1099909991920203810, guid: fc748b6628afe09468c9b17e68873a25, type: 3}
-      propertyPath: destroyRotationSpeed
-      value: 500
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2251122847730599123, guid: fc748b6628afe09468c9b17e68873a25, type: 3}
       propertyPath: m_Name
@@ -148,7 +144,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3748927036697665718, guid: fc748b6628afe09468c9b17e68873a25, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 3748927036697665718, guid: fc748b6628afe09468c9b17e68873a25, type: 3}
       propertyPath: m_LocalPosition.y
