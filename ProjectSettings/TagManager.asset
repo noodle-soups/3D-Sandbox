@@ -6,8 +6,9 @@ TagManager:
   tags:
   - Obsticle
   - Game Manager
-  - Player-Bullet
   - Object to Destroy
+  - Player-Primary-Weapon
+  - Player-Secondary-Weapon
   layers:
   - Default
   - TransparentFX
@@ -16,7 +17,7 @@ TagManager:
   - Water
   - UI
   - Ground
-  - Player-Bullet
+  - Player-Weapon
   - 
   - 
   - 

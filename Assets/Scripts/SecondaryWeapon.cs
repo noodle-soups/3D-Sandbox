@@ -34,6 +34,7 @@ public class SecondaryWeapon : MonoBehaviour
         Debug.Log("Fire secondary weapon");
 
         var _bullet = Instantiate(bulletPrefab, bulletSpawnPoint.position, bulletSpawnPoint.rotation);
+        _bullet.transform.SetParent(bulletSpawnPoint);
         Destroy(_bullet, bulletDestroyTime);
     }
 

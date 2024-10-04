@@ -9,19 +9,16 @@ public class ObjectToDestroy : MonoBehaviour
     [SerializeField] private float destroyRotationSpeed;
     [SerializeField] private float destroyShrinkSpeed;
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        if (collision.gameObject.tag == "Player-Bullet")
+        if (other.gameObject.tag == "Player-Primary-Weapon")
         {
-            Debug.Log("Hit by bullet");
-
             readyToDestroy = true;
-
-            // destroy game object
-            //Destroy(gameObject);
-            
-            // destroy bullet
-            Destroy(collision.gameObject);
+            Destroy(other.gameObject);
+        }
+        else if (other.gameObject.tag == "Player-Secondary-Weapon")
+        {
+            readyToDestroy = true;
         }
     }
 
@@ -40,7 +37,6 @@ public class ObjectToDestroy : MonoBehaviour
             // then destroy
             if (Mathf.Min(transform.localScale.x, transform.localScale.y, transform.localScale.z) <= 0)
                 Destroy(gameObject);
-
         }
     }
 

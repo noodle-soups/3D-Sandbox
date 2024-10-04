@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 7603587135346289943}
   m_Layer: 7
   m_Name: PrimaryWeapon
-  m_TagString: Player-Bullet
+  m_TagString: Player-Primary-Weapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
