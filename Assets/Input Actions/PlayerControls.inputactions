@@ -33,6 +33,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "Secondary Weapon",
+                    "type": "Button",
+                    "id": "f563dd17-6e60-4ac4-90d4-8fc79c82963b",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Dash",
                     "type": "Button",
                     "id": "82756250-446e-4471-9b2a-ae8b430bf656",
@@ -172,6 +181,28 @@
                     "processors": "",
                     "groups": "KBM",
                     "action": "Dash",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2f4cb816-13a8-45bf-9372-c2e4424c5ca1",
+                    "path": "<Gamepad>/leftShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Secondary Weapon",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "07565263-0a83-4c61-aafa-c6fb32c1c511",
+                    "path": "<Keyboard>/r",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "KBM",
+                    "action": "Secondary Weapon",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

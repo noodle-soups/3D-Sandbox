@@ -427,7 +427,7 @@ MonoBehaviour:
   gravityValue: -9.81
   controllerDeadZone: 0.1
   gamepadRotateSmoothing: 1000
-  dashSpeed: 25
+  dashSpeed: 30
   dashDuration: 0.3
   dashCooldown: 0.5
   dashCooldownTimer: 0
@@ -1410,9 +1410,10 @@ GameObject:
   - component: {fileID: 1515908464}
   - component: {fileID: 1515908467}
   - component: {fileID: 1515908466}
-  - component: {fileID: 1515908468}
+  - component: {fileID: 1515908469}
+  - component: {fileID: 1515908470}
   m_Layer: 3
-  m_Name: Primary Weapon
+  m_Name: Weapon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1484,7 +1485,7 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1515908463}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &1515908468
+--- !u!114 &1515908469
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1493,13 +1494,28 @@ MonoBehaviour:
   m_GameObject: {fileID: 1515908463}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2a1303208ff28794b9f2d78d01cb50e2, type: 3}
+  m_Script: {fileID: 11500000, guid: 36895c9929984ed4090f2cfd1cf8fa72, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   bulletSpawnPoint: {fileID: 599010165}
   bulletPrefab: {fileID: 8015436422036265387, guid: e3d590e1060d84c4abfde6b760993b41, type: 3}
   bulletSpeed: 30
-  bulletCooldown: 0.15
+  bulletCooldown: 0.1
+  bulletDestroyTime: 3
+--- !u!114 &1515908470
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1515908463}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5feb9b059c3353a4c9dee48333cfed9e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletPrefab: {fileID: 804746180477119240, guid: 6e1b26f701f451548b9ffbfd98269556, type: 3}
+  bulletSpawnPoint: {fileID: 599010165}
   bulletDestroyTime: 3
 --- !u!1 &1552301825
 GameObject:
