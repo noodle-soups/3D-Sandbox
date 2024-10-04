@@ -44,7 +44,6 @@ public class SecondaryWeapon : MonoBehaviour
 
     private void FireSecondaryWeapon()
     {
-        Debug.Log("Fire secondary weapon");
         var _bullet = Instantiate(bulletPrefab, bulletSpawnPoint.position, bulletSpawnPoint.rotation);
         _bullet.transform.SetParent(bulletSpawnPoint);
         Destroy(_bullet, bulletDestroyTime);
@@ -53,7 +52,6 @@ public class SecondaryWeapon : MonoBehaviour
     private IEnumerator SecondaryWeaponCooldown()
     {
         isWeaponAvailable = false;
-
         cooldownRemaining = cooldownTime;
 
         while (cooldownRemaining > 0)
@@ -63,6 +61,7 @@ public class SecondaryWeapon : MonoBehaviour
         }
 
         isWeaponAvailable = true;
+        cooldownRemaining = 0;
     }
 
 }
