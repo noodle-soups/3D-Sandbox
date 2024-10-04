@@ -12,7 +12,6 @@ public class PlayerController : MonoBehaviour
     private CharacterController controller;
     private PlayerControls playerControls;
     private PlayerInput playerInput;
-    private Rigidbody rb;
 
     [Header("States")]
     [SerializeField] private bool isIdle = true;
@@ -49,7 +48,6 @@ public class PlayerController : MonoBehaviour
         controller = GetComponent<CharacterController>();
         playerControls = new PlayerControls();
         playerInput = GetComponent<PlayerInput>();
-        rb = GetComponent<Rigidbody>();
 
         // state
         isIdle = true;
@@ -90,12 +88,12 @@ public class PlayerController : MonoBehaviour
             return;
         }
 
-        if (rb.velocity == Vector3.zero)
+        if (controller.velocity == Vector3.zero)
         {
             isIdle = true;
             isMoving = false;
         }
-        else if (rb.velocity != Vector3.zero)
+        else if (controller.velocity != Vector3.zero)
         {
             isIdle = false;
             isMoving = true;
