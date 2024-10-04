@@ -1223,6 +1223,9 @@ MonoBehaviour:
   bulletPrefab: {fileID: 8808408967921370024, guid: 3b639879c0f9d494ebd8d8d88676b41f, type: 3}
   bulletSpawnPoint: {fileID: 599010165}
   bulletDestroyTime: 3
+  isWeaponAvailable: 1
+  cooldownRemaining: 0
+  cooldownTime: 5
 --- !u!1 &1552301825
 GameObject:
   m_ObjectHideFlags: 0
