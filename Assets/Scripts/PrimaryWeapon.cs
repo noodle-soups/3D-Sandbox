@@ -12,6 +12,11 @@ public class PrimaryWeapon : MonoBehaviour
     [Header("Player")]
     [SerializeField] private GameObject player;
 
+    [Header("Weaponry")]
+    [SerializeField] private Transform weaponsParent;
+    [SerializeField] private SecondaryWeapon secondaryWeapon;
+    [SerializeField] private bool secondaryWeaponAvailable;
+
     [Header("Prefab")]
     [SerializeField] private GameObject bulletPrefab;
     [SerializeField] private Transform bulletSpawnPoint;
@@ -34,9 +39,20 @@ public class PrimaryWeapon : MonoBehaviour
 
     private void Awake()
     {
-        // components
+        // player movements
         playerController = player.GetComponent<PlayerController>();
+
+        // weaponry
+        weaponsParent = transform.parent;
+        secondaryWeapon = weaponsParent.GetComponentInChildren<SecondaryWeapon>();
+
+        // input actions
         playerControls = new PlayerControls();
+    }
+
+    private void Update()
+    {
+        isWeaponAvailable =! secondaryWeapon.isWeaponFiring;
     }
 
     private void OnEnable()
@@ -56,7 +72,7 @@ public class PrimaryWeapon : MonoBehaviour
     private void OnFireStarted(InputAction.CallbackContext context)
     {
         // begin firing only if not already firing
-        if (isWeaponAvailable && fireCoroutine == null)
+        if (fireCoroutine == null)
             fireCoroutine = StartCoroutine(FireRoutine());
     }
 
@@ -73,7 +89,7 @@ public class PrimaryWeapon : MonoBehaviour
     private IEnumerator FireRoutine()
     {
         // allow firing while coroutine is active
-        while (true)
+        while (true && isWeaponAvailable)
         {
             Fire();
             // apply cooldown between bullets
@@ -83,11 +99,8 @@ public class PrimaryWeapon : MonoBehaviour
 
     private void Fire()
     {
-        // instantiate the bullet
         var bullet = Instantiate(bulletPrefab, bulletSpawnPoint.position, bulletSpawnPoint.rotation);
-        // apply bullet momentum
         bullet.GetComponent<Rigidbody>().velocity = transform.forward * bulletSpeed;
-        // destroy bullet after time
         Destroy(bullet, lifetime);
     }
 }

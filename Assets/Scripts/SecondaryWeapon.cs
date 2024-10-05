@@ -15,7 +15,7 @@ public class SecondaryWeapon : MonoBehaviour
     [Header("Weaponry")]
     [SerializeField] private Transform weaponsParent;
     [SerializeField] private PrimaryWeapon primaryWeapon;
-    [SerializeField] private bool primaryWeaponAvailable;
+    public bool primaryWeaponAvailable;
 
     [Header("Prefab")]
     [SerializeField] private GameObject bulletPrefab;
@@ -23,7 +23,7 @@ public class SecondaryWeapon : MonoBehaviour
     
     [Header("Weapon State")]
     [SerializeField] private bool isWeaponAvailable = true;
-    [SerializeField] private bool isWeaponFiring;
+    public bool isWeaponFiring;
 
     [Header("Cooldown")]
     [SerializeField] private float cooldown;
