@@ -31,8 +31,11 @@ public class SecondaryWeapon : MonoBehaviour
 
     private void Awake()
     {
+        // components
         playerController = player.GetComponent<PlayerController>();
         playerControls = new PlayerControls();
+
+        // bindings
         playerControls.Controls.SecondaryWeapon.performed += ctx => TryFireSecondaryWeapon();
     }
 
