@@ -12,6 +12,11 @@ public class SecondaryWeapon : MonoBehaviour
     [Header("Player")]
     [SerializeField] private GameObject player;
 
+    [Header("Weaponry")]
+    [SerializeField] private Transform weaponsParent;
+    [SerializeField] private PrimaryWeapon primaryWeapon;
+    [SerializeField] private bool primaryWeaponAvailable;
+
     [Header("Prefab")]
     [SerializeField] private GameObject bulletPrefab;
     [SerializeField] private Transform bulletSpawnPoint;
@@ -32,8 +37,14 @@ public class SecondaryWeapon : MonoBehaviour
 
     private void Awake()
     {
-        // components
+        // player movements
         playerController = player.GetComponent<PlayerController>();
+
+        // weaponry
+        weaponsParent = transform.parent;
+        primaryWeapon = weaponsParent.GetComponentInChildren<PrimaryWeapon>();
+
+        // input actions
         playerControls = new PlayerControls();
 
         // bindings
@@ -86,18 +97,26 @@ public class SecondaryWeapon : MonoBehaviour
     private IEnumerator HandleChanges()
     {
         isWeaponFiring = true;
-        lifetimeLeft = lifetime;
+        ChangeWeaponStates();
 
+        lifetimeLeft = lifetime;
         while (lifetimeLeft > 0)
         {
             lifetimeLeft -= Time.deltaTime;
             playerController.gamepadRotateSmoothing = playerRotationSpeed;
             yield return null;
         }
+        lifetimeLeft = 0;
 
         playerController.gamepadRotateSmoothing = 750f;
         isWeaponFiring = false;
-        lifetimeLeft = 0;
+        ChangeWeaponStates();
+    }
+
+    private void ChangeWeaponStates()
+    {
+        primaryWeaponAvailable =! isWeaponFiring;
+        primaryWeapon.isWeaponAvailable = primaryWeaponAvailable;
     }
 
 }

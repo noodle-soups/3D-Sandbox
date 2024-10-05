@@ -17,7 +17,7 @@ public class PrimaryWeapon : MonoBehaviour
     [SerializeField] private Transform bulletSpawnPoint;
 
     [Header("Weapon State")]
-    [SerializeField] private bool isWeaponAvailable = true;
+    public bool isWeaponAvailable = true;
     [SerializeField] private bool isWeaponFiring;
 
     [Header("Cooldown")]
