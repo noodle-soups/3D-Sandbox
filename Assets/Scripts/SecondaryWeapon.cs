@@ -26,8 +26,9 @@ public class SecondaryWeapon : MonoBehaviour
     [SerializeField] private float lifetime;
     [SerializeField] private float lifetimeLeft;
 
-    [Header("Rotation")]
-    [SerializeField] private float weaponRotationSpeed;
+    [Header("Weapon Info")]
+    [SerializeField] private float bulletSpeed;
+    [SerializeField] private float playerRotationSpeed;
 
     private void Awake()
     {
@@ -90,7 +91,7 @@ public class SecondaryWeapon : MonoBehaviour
         while (lifetimeLeft > 0)
         {
             lifetimeLeft -= Time.deltaTime;
-            playerController.gamepadRotateSmoothing = weaponRotationSpeed;
+            playerController.gamepadRotateSmoothing = playerRotationSpeed;
             yield return null;
         }
 
