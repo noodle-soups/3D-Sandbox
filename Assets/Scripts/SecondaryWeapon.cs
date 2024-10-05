@@ -111,6 +111,8 @@ public class SecondaryWeapon : MonoBehaviour
         playerController.gamepadRotateSmoothing = 750f;
         isWeaponFiring = false;
         ChangeWeaponStates();
+
+        primaryWeapon.ResumeFiring();
     }
 
     private void ChangeWeaponStates()
