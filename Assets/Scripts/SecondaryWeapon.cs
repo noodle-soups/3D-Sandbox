@@ -6,21 +6,27 @@ using UnityEngine;
 public class SecondaryWeapon : MonoBehaviour
 {
     // references
-    [SerializeField] private GameObject player;
-
     private PlayerControls playerControls;
     private PlayerController playerController;
 
+    [Header("Player")]
+    [SerializeField] private GameObject player;
+
+    [Header("Prefab")]
     [SerializeField] private GameObject bulletPrefab;
     [SerializeField] private Transform bulletSpawnPoint;
-    [SerializeField] private float bulletDestroyTime;
-    [SerializeField] private float bulletLifetime;
-
+    
+    [Header("Weapon State")]
     [SerializeField] private bool isWeaponAvailable = true;
     [SerializeField] private bool isWeaponFiring;
-    [SerializeField] private float cooldownRemaining;
-    [SerializeField] private float cooldownTime;
 
+    [Header("Cooldown")]
+    [SerializeField] private float cooldown;
+    [SerializeField] private float cooldownLeft;
+    [SerializeField] private float lifetime;
+    [SerializeField] private float lifetimeLeft;
+
+    [Header("Rotation")]
     [SerializeField] private float weaponRotationSpeed;
 
     private void Awake()
@@ -55,38 +61,39 @@ public class SecondaryWeapon : MonoBehaviour
     {
         var _bullet = Instantiate(bulletPrefab, bulletSpawnPoint.position, bulletSpawnPoint.rotation);
         _bullet.transform.SetParent(bulletSpawnPoint);
-        Destroy(_bullet, bulletDestroyTime);
+        Destroy(_bullet, lifetime);
     }
 
     private IEnumerator SecondaryWeaponCooldown()
     {
         isWeaponAvailable = false;
-        cooldownRemaining = cooldownTime;
+        cooldownLeft = cooldown;
 
-        while (cooldownRemaining > 0)
+        while (cooldownLeft > 0)
         {
-            cooldownRemaining -= Time.deltaTime;
+            cooldownLeft -= Time.deltaTime;
             yield return null;
         }
 
         isWeaponAvailable = true;
-        cooldownRemaining = 0;
+        cooldownLeft = 0;
     }
 
     private IEnumerator HandleChanges()
     {
         isWeaponFiring = true;
-        bulletLifetime = bulletDestroyTime;
+        lifetimeLeft = lifetime;
 
-        while (bulletLifetime > 0)
+        while (lifetimeLeft > 0)
         {
-            bulletLifetime -= Time.deltaTime;
-            Debug.Log(playerController.gamepadRotateSmoothing);
+            lifetimeLeft -= Time.deltaTime;
+            playerController.gamepadRotateSmoothing = weaponRotationSpeed;
             yield return null;
         }
 
+        playerController.gamepadRotateSmoothing = 750f;
         isWeaponFiring = false;
-        bulletLifetime = 0;
+        lifetimeLeft = 0;
     }
 
 }

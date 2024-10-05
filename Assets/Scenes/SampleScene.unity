@@ -563,7 +563,7 @@ MonoBehaviour:
   playerSpeed: 10
   gravityValue: -9.81
   controllerDeadZone: 0.1
-  gamepadRotateSmoothing: 1000
+  gamepadRotateSmoothing: 750
   isGamepad: 0
 --- !u!54 &441031627
 Rigidbody:
@@ -1364,13 +1364,13 @@ MonoBehaviour:
   player: {fileID: 441031619}
   bulletPrefab: {fileID: 8808408967921370024, guid: 3b639879c0f9d494ebd8d8d88676b41f, type: 3}
   bulletSpawnPoint: {fileID: 599010165}
-  bulletDestroyTime: 3
-  bulletLifetime: 0
   isWeaponAvailable: 1
   isWeaponFiring: 0
-  cooldownRemaining: 0
-  cooldownTime: 5
-  weaponRotationSpeed: 0
+  cooldown: 5
+  cooldownLeft: 0
+  lifetime: 3
+  lifetimeLeft: 0
+  weaponRotationSpeed: 50
 --- !u!1 &1552301825
 GameObject:
   m_ObjectHideFlags: 0
