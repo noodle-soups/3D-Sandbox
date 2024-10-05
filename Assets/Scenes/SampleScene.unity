@@ -191,6 +191,7 @@ GameObject:
   - component: {fileID: 350487826}
   - component: {fileID: 350487825}
   - component: {fileID: 350487824}
+  - component: {fileID: 350487829}
   - component: {fileID: 350487828}
   m_Layer: 0
   m_Name: Dummy
@@ -214,7 +215,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -297,6 +298,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8536972d9dbc4f46975eae864a41de2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!54 &350487829
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 350487823}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 1
 --- !u!4 &371967605 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3748927036697665718, guid: fc748b6628afe09468c9b17e68873a25, type: 3}
@@ -532,15 +560,10 @@ MonoBehaviour:
   isIdle: 1
   isMoving: 0
   isDashing: 0
-  dashReady: 1
   playerSpeed: 10
   gravityValue: -9.81
   controllerDeadZone: 0.1
   gamepadRotateSmoothing: 1000
-  dashSpeed: 30
-  dashDuration: 0.3
-  dashCooldown: 0.5
-  dashCooldownTimer: 0
   isGamepad: 0
 --- !u!54 &441031627
 Rigidbody:
@@ -1338,12 +1361,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5feb9b059c3353a4c9dee48333cfed9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 441031619}
   bulletPrefab: {fileID: 8808408967921370024, guid: 3b639879c0f9d494ebd8d8d88676b41f, type: 3}
   bulletSpawnPoint: {fileID: 599010165}
   bulletDestroyTime: 3
+  bulletLifetime: 0
   isWeaponAvailable: 1
+  isWeaponFiring: 0
   cooldownRemaining: 0
-  cooldownTime: 3
+  cooldownTime: 5
+  weaponRotationSpeed: 0
 --- !u!1 &1552301825
 GameObject:
   m_ObjectHideFlags: 0

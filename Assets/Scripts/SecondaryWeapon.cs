@@ -6,18 +6,26 @@ using UnityEngine;
 public class SecondaryWeapon : MonoBehaviour
 {
     // references
+    [SerializeField] private GameObject player;
+
     private PlayerControls playerControls;
+    private PlayerController playerController;
 
     [SerializeField] private GameObject bulletPrefab;
     [SerializeField] private Transform bulletSpawnPoint;
     [SerializeField] private float bulletDestroyTime;
+    [SerializeField] private float bulletLifetime;
 
     [SerializeField] private bool isWeaponAvailable = true;
+    [SerializeField] private bool isWeaponFiring;
     [SerializeField] private float cooldownRemaining;
     [SerializeField] private float cooldownTime;
 
+    [SerializeField] private float weaponRotationSpeed;
+
     private void Awake()
     {
+        playerController = player.GetComponent<PlayerController>();
         playerControls = new PlayerControls();
         playerControls.Controls.SecondaryWeapon.performed += ctx => TryFireSecondaryWeapon();
     }
@@ -39,6 +47,7 @@ public class SecondaryWeapon : MonoBehaviour
         {
             FireSecondaryWeapon();
             StartCoroutine(SecondaryWeaponCooldown());
+            StartCoroutine(HandleChanges());
         }
     }
 
@@ -62,6 +71,22 @@ public class SecondaryWeapon : MonoBehaviour
 
         isWeaponAvailable = true;
         cooldownRemaining = 0;
+    }
+
+    private IEnumerator HandleChanges()
+    {
+        isWeaponFiring = true;
+        bulletLifetime = bulletDestroyTime;
+
+        while (bulletLifetime > 0)
+        {
+            bulletLifetime -= Time.deltaTime;
+            Debug.Log(playerController.gamepadRotateSmoothing);
+            yield return null;
+        }
+
+        isWeaponFiring = false;
+        bulletLifetime = 0;
     }
 
 }

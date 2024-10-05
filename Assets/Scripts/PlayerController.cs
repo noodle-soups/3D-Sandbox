@@ -18,21 +18,12 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private bool isMoving = false;
     [SerializeField] private bool isDashing = false;
 
-    [Header("Cooldowns")]
-    [SerializeField] private bool dashReady = true;
-
     [Header("Player Properties")]
     [SerializeField] private float playerSpeed = 10f;
     [SerializeField] private float gravityValue = -9.81f;
     [SerializeField] private float controllerDeadZone = 0.1f;
-    [SerializeField] private float gamepadRotateSmoothing = 1000f;
-
-    [Header("Dash Properties")]
-    [SerializeField] private float dashSpeed = 20f;
-    [SerializeField] private float dashDuration = 0.2f;
-    [SerializeField] private float dashCooldown = 2f;
-    [SerializeField] private float dashCooldownTimer;
-    private Vector3 dashDirection;
+    //[SerializeField] private float gamepadRotateSmoothing = 1000f;
+    public float gamepadRotateSmoothing = 1000f;
 
     // variables
     private Vector2 movement;
@@ -42,7 +33,7 @@ public class PlayerController : MonoBehaviour
     // gamepad
     [SerializeField] private bool isGamepad;
 
-    void Awake()
+    private void Awake()
     {
         // references
         controller = GetComponent<CharacterController>();
@@ -51,42 +42,33 @@ public class PlayerController : MonoBehaviour
 
         // state
         isIdle = true;
-
-        // bind inputs
-        playerControls.Controls.Dash.performed += _ => StartDash();
     }
 
-    void OnEnable()
+    private void OnEnable()
     {
         playerControls.Enable();
     }
 
-    void OnDisable()
+    private void OnDisable()
     {
         playerControls.Disable();
     }
 
-    void Update()
+    private void Update()
     {
         HandleInput();
         HandleMovement();
         HandleRotation();
     }
 
-    void HandleInput()
+    private void HandleInput()
     {
         movement = playerControls.Controls.Movement.ReadValue<Vector2>();
         aim = playerControls.Controls.Aim.ReadValue<Vector2>();
     }
 
-    void HandleMovement()
+    private void HandleMovement()
     {
-        // dash movement take priority over normal movement
-        if (isDashing)
-        {
-            controller.Move(dashDirection * Time.deltaTime * dashSpeed);
-            return;
-        }
 
         if (controller.velocity == Vector3.zero)
         {
@@ -101,13 +83,10 @@ public class PlayerController : MonoBehaviour
 
         Vector3 move = new Vector3(movement.x, 0, movement.y);
         controller.Move(move * Time.deltaTime * playerSpeed);
-
-        // default gravity
-        playerVelocity.y += gravityValue * Time.deltaTime;
         controller.Move(playerVelocity * Time.deltaTime);
     }
 
-    void HandleRotation()
+    private void HandleRotation()
     {
         if (isGamepad)
         {
@@ -136,28 +115,12 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void LookAt(Vector3 lookPoint)
+    private void LookAt(Vector3 lookPoint)
     {
         Vector3 heightCorrectedPoint = new Vector3(lookPoint.x, transform.position.y, lookPoint.z);
         transform.LookAt(heightCorrectedPoint);
     }
 
-    void StartDash()
-    {
-        if (!dashReady) return;
-        isDashing = true;
-        dashReady = false;
-        dashDirection = new Vector3(movement.x, 0, movement.y).normalized;
-        StartCoroutine(StopDash());
-    }
-
-    IEnumerator StopDash()
-    {
-        yield return new WaitForSeconds(dashDuration);
-        isDashing = false;
-        yield return new WaitForSeconds(dashCooldown);
-        dashReady = true;
-    }
 
     public void OnDeviceChange(PlayerInput pi)
     {

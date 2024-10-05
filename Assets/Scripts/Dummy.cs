@@ -5,11 +5,11 @@ using UnityEngine;
 public class Dummy : MonoBehaviour
 {
 
-    private void OnTriggerEnter(Collider other)
+    private void OnCollisionEnter(Collision collision)
     {
-        if (other.gameObject.tag == "Player-Secondary-Weapon")
+        if (collision.gameObject.tag == "Player-Secondary-Weapon")
         {
-            Debug.Log("HIT!!");
+            Debug.Log("HIT!!!");
         }
     }
 
